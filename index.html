@@ -4,13 +4,28 @@
   <script src="scripts/app.js"></script>
 </head>
 <body ng-controller="mainTab">
-
-  <ul>
-    <li ng-repeat="restaurant in restaurants">
-      <span>{{restaurant.name}}</span>
-      <p>{{restaurant.description}}</p>
-    </li>
-  </ul>
-
+  <div class="tomato-main-tab-content">
+    <h1 class="tomato-head-logo"> Tomato </h1>
+    <button class="tomato-geolocate-button"
+            ng-click="getCurrentLocation()"> Get current location!</button>
+    <p ng-if="foundCurrentLocation"> You are at {{currentLatitude}}, {{currentLongitude}} </p>
+    <p ng-if="geoLocationErrorLog"> {{geoLocationErrorLog}} </p>
+  </div>
 </body>
+  <script src="scripts/services/GeoLocationService.js"></script>
+  <script src="scripts/controllers/mainTab.js"></script>
 </html>
+
+
+<style>
+  .tomato-main-tab-content {
+    text-align: center;
+  }
+  .tomato-head-logo {
+    font-size: 100px;
+  }
+  .tomato-geolocate-button {
+    margin-top: 10%;
+    padding: 10px;
+  }
+</style>
