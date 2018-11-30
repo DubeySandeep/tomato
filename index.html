@@ -1,0 +1,16 @@
+<html ng-app="tomato">
+<head>
+  <script src="scripts/static/angular.min.js"></script>
+  <script src="scripts/app.js"></script>
+</head>
+<body ng-controller="mainTab">
+
+  <ul>
+    <li ng-repeat="restaurant in restaurants">
+      <span>{{restaurant.name}}</span>
+      <p>{{restaurant.description}}</p>
+    </li>
+  </ul>
+
+</body>
+</html>
