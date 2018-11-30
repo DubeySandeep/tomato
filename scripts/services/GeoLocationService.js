@@ -1,4 +1,4 @@
-tomato.factory('GeoLocationService', [function() {
+tomato.factory('GeoLocationService', ['$q', function($q) {
     var _getCurrentLocation = function(successCallback, errorCallback) {
         var errorLog = '';
         if (navigator.geolocation) {
@@ -6,7 +6,7 @@ tomato.factory('GeoLocationService', [function() {
             successCallback, function(error) {
                 switch(error.code) {
                     case error.PERMISSION_DENIED:
-                        errorLog = "Please allow us to use check your current location!"
+                        errorLog = "Please allow us to check your current location!"
                         break;
                     case error.POSITION_UNAVAILABLE:
                         errorLog = "Unable to find your current location."
@@ -28,7 +28,9 @@ tomato.factory('GeoLocationService', [function() {
 
     return {
         getCurrentLocation: function(successCallback, errorCallback) {
-            return _getCurrentLocation(successCallback, errorCallback);
+            return $q(function(resolve, reject){
+                _getCurrentLocation(resolve, reject)
+            });
         }
-    };
+    }
 }]);

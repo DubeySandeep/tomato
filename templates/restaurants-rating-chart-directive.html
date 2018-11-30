@@ -1,0 +1,52 @@
+<figure>
+  <figcaption>Restaurants with ratings:</figcaption>
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" class="tomato-chart" width="420" height="{{figHeight}}" aria-labelledby="title" role="img">
+  <title id="title">A bar chart showing restaurants rating.</title>
+  <g class="tomato-bar" ng-repeat="restaurant in nearbyRestaurantsData">
+    <a xlink:href="{{restaurant.link}}">
+      <rect width="{{20*restaurant.rating}}" height="15" y={{$index*20}}></rect>
+      <text x="{{20*restaurant.rating + 5}}" y="{{$index*20 + 8}}" dy=".35em">{{restaurant.name}}</text>
+    </a>
+  </g>
+</svg>
+</figure>
+
+
+<style>
+.tomato-bar {
+  fill: #aaa;
+  height: 21px;
+  transition: fill .3s ease;
+  cursor: pointer;
+  font-family: Helvetica, sans-serif;
+
+  text {
+    fill: #555;
+  }
+}
+.tomato-chart:hover,
+.tomato-chart:focus {
+.tomato-bar {
+    fill: #aaa;
+  }
+}
+
+.tomato-bar:hover,
+.tomato-bar:focus {
+  fill: red !important;
+
+  text {
+    fill: red;
+  }
+}
+
+figure {
+  margin: auto;
+}
+figcaption {
+  font-weight: bold;
+  color: #000;
+  margin-bottom: 20px;
+}
+
+</style>

@@ -2,18 +2,32 @@
 <head>
   <script src="scripts/static/angular.min.js"></script>
   <script src="scripts/app.js"></script>
+  <link rel="stylesheet" type="text/css" media="screen"
+      href="style/tomato.css">
 </head>
 <body ng-controller="mainTab">
   <div class="tomato-main-tab-content">
     <h1 class="tomato-head-logo"> Tomato </h1>
-    <button class="tomato-geolocate-button"
-            ng-click="getCurrentLocation()"> Get current location!</button>
-    <p ng-if="foundCurrentLocation"> You are at {{currentLatitude}}, {{currentLongitude}} </p>
+    <div>
+      <button class="tomato-geolocate-button" ng-if="!loadingData"
+              ng-click="getCurrentLocation()"> {{foundCurrentLocation ? 'Refresh' : 'Get current location!'}}</button>
+    </div>
+    <div ng-if="loadingData" class="tomato-text">Getting nearby data <loading-dots></loading-dots></div>
+  </div>
+  <div class="tomato-graph-data">
+    <div ng-if="foundCurrentLocation">
+      <restaurants-result class="tomato-resturant-data-region" location-data="locationData" lat="currentLatitude" lon="currentLongitude"><restaurants-result>
+    </div>
     <p ng-if="geoLocationErrorLog"> {{geoLocationErrorLog}} </p>
   </div>
-</body>
+  <!-- Scripts to load: -->
   <script src="scripts/services/GeoLocationService.js"></script>
+  <script src="scripts/services/ZomatoApiService.js"></script>
+  <script src="scripts/directives/RestaurantsResultDirective.js"></script>
+  <script src="scripts/directives/LoadingDotsDirective.js"></script>
+  <script src="scripts/directives/RestaurantsRatingChartDirective.js"></script>
   <script src="scripts/controllers/mainTab.js"></script>
+</body>
 </html>
 
 
@@ -23,9 +37,19 @@
   }
   .tomato-head-logo {
     font-size: 100px;
+    margin: auto;
+    padding-bottom: 50px;
+    transition: all 0.5s;
   }
-  .tomato-geolocate-button {
-    margin-top: 10%;
-    padding: 10px;
+  .tomato-resturant-data-region {
+    transition: all 0.5s;
+  }
+  .tomato-graph-data {
+    margin-left: 20%;
+  }
+  .tomato-text {
+    font-size: 15px;
+    font-style: italic;
+    transition: all 0.5s;
   }
 </style>

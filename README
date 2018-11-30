@@ -1,0 +1,5 @@
+To start server follow the commands given below:
+- cd `path/to/tomato`.
+- npm install
+- npm install http-server -g
+- run `http-server`
